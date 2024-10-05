@@ -1,0 +1,28 @@
+{
+  "name": "Einheitenrechner",
+  "short_name": "Einheitenrechner",
+  "theme_color": "#2196f3",
+  "background_color": "#2196f3",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/index.html",
+  "icons": [
+    {
+      "src": "icons/200.png",
+      "sizes": "200x200"
+    },
+    {
+      "src": "icons/128.png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "icons/32.png",
+      "sizes": "32x32"
+    },
+    {
+      "src": "icons/16.png",
+      "sizes": "16x16"
+    }
+  ]
+}

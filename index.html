@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Einheitenrechner</title>
+    <meta name="description" content="Mit unserem Einheitenrechner können Sie schnell und einfach zwischen verschiedenen Maßeinheiten umrechnen. Ob Längen, Währungen, Volumen, Temperaturen oder mehr - die App bietet eine benutzerfreundliche Oberfläche und unterstützt zahlreiche gängige Einheiten. Ideal für den Alltag, die Arbeit oder beim Reisen, ermöglicht der Umrechner präzise Ergebnisse in Sekundenschnelle.">
+    <meta name="keywords" content="einheitenrechner, kostenlos, free">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="icons/32.png" type="image/x-icon">
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body id="body">
+    <!-- Main Page -->
+    <header id="header">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff">
+            <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+        </svg>
+        <h1>Einheitenrechner</h1>
+    </header>
+    <main id="main"></main>
+
+    <!-- Window to calculate units -->
+    <section id="window">
+        <header id="header-win">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff"
+                onclick="goBack();">
+                <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" />
+            </svg>
+            <h1>Länge</h1>
+        </header>
+        <main id="main-win">
+            <div id="win-input" role="form">
+                <input type="text" class="input" placeholder="z. B. 20cm">
+                <button class="btn-pink">Berechnen</button>
+            </div>
+            <div id="unit-results">
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+                <p>vsdcasj</p>
+            </div>
+        </main>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <img src="icons/footer.png" alt="Logo" height="100" draggable="false">
+        <p>&copy;<span id="year">2024</span> Felix Wrba</p>
+        <a href="./imprint.html">Impressum</a>
+    </footer>
+
+    <!-- Javascript -->
+    <script src="script.js"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("/sw.js");
+        }
+    </script>
+</body>
+
+</html>
