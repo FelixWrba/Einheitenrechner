@@ -1,5 +1,3 @@
-document.getElementById('year').innerHTML = new Date().getFullYear();
-
 class Unit {
     example;
     constructor(example) {
@@ -39,10 +37,10 @@ function goBack() {
         html += `<li onclick="openUnit('${key}')" role="button">${key}</li>`;
     }
     html += '</ul>';
-    document.getElementById('header').scrollIntoView({ 'behavior': 'smooth' });
+    document.getElementById('header').scrollIntoView();
     main.innerHTML = html;
     win.window.style.top = '110%';
     win.window.style.opacity = '0';
 }
 
-openUnit("Länge");
+goBack();
