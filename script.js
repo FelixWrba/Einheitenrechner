@@ -6,6 +6,8 @@ class Unit {
         this.calculate = calculate;
     }
 }
+// 8.81599 => 8.82
+const round = int => Math.round(int * 1000) / 1000;
 
 let unitResults = document.getElementById('unit-results');
 let main = document.getElementById('main');
@@ -17,15 +19,41 @@ let win = {
 
 let units = {
     'Zeit': new Unit('120s', (value, unit) => {
-        let seconds = value;
-        return `<p>Sekunden: ${seconds}</p>
-        <p>Minuten: ${seconds / 60}</p>
-        <p>Stunden: ${seconds / 3600}</p>
-        <p>Tage: ${seconds / 86400}</p>
-        <p>Jahre: ${seconds / 31536000}</p>`;
+        let seconds;
+        if(unit == 's') seconds = value;
+        else if(unit == 'min') seconds = value * 60;
+        else if(unit == 'h') seconds = value * 3600;
+        else if(unit == 'd') seconds = value * 86400;
+        else if(unit == 'w') seconds = value * 604800;
+        else if(unit == 'mon') seconds = value * 2592000;
+        else if(unit == 'y') seconds = value * 31536000;
+        else return `<h3>Gültige Einheiten</h3><p>s, min, h, d, w, mon, y</p>`;
+
+        return `<div class="grid"><span>Sekunden:</span><span>${round(seconds)}</span>
+        <span>Minuten:</span></span>${round(seconds / 60)}</span>
+        <span>Stunden:</span></span>${round(seconds / 3600)}</span>
+        <span>Tage:</span></span>${round(seconds / 86400)}</span>
+        <span>Wochen:</span></span>${round(seconds / 604800)}</span>
+        <span>Monate:</span></span>${round(seconds / 2592000)}</span>
+        <span>Jahre:</span></span>${round(seconds / 31536000)}</span></div>`;
     }),
     'Länge': new Unit('20m', (value, unit) => {
-
+        let meters;
+        if(unit == 'm') meters = value;
+        else if(unit == 'nm') meters = value * 1852;
+        else if(unit == 'z') meters = value / 100 * 2.54;
+        else if(unit == 'ft') meters = value / 100 * 30.48;
+        else if(unit == 'y') meters = value * 604800;
+        else if(unit == 'mi') meters = value * 2592000;
+        else if(unit == 'sm') meters = value * 31536000;
+        else return `<h3>Gültige Einheiten</h3><p>m, nm, z, ft, y, mi, sm</p>`;
+        return `<div class="grid"><span>Sekunden:</span><span>${round(seconds)}</span>
+        <span>Minuten:</span></span>${round(seconds / 60)}</span>
+        <span>Stunden:</span></span>${round(seconds / 3600)}</span>
+        <span>Tage:</span></span>${round(seconds / 86400)}</span>
+        <span>Wochen:</span></span>${round(seconds / 604800)}</span>
+        <span>Monate:</span></span>${round(seconds / 2592000)}</span>
+        <span>Jahre:</span></span>${round(seconds / 31536000)}</span></div>`;
     }),
     'Fläche': new Unit('16m2', (value, unit) => {
 
@@ -46,7 +74,8 @@ let units = {
 
 function openUnit(unit) {
     document.getElementById('header-win-title').innerHTML = unit;
-    document.getElementById('win-input').innerHTML = `<input type="text" class="input" placeholder="z. B. ${units[unit].example}" id="unit-input" autocomplete="off"><button class="btn-pink" onclick="unitResults.innerHTML = calculate(document.getElementById('unit-input').value, '${unit}')">Berechnen</button>`;
+    document.getElementById('win-input').innerHTML = `<input type="text" class="input" placeholder="z. B. ${units[unit].example}" id="unit-input" autocomplete="off"><button class="btn-pink">Berechnen</button>`;
+    document.getElementById('win-input').onsubmit = () => unitResults.innerHTML = calculate(document.getElementById('unit-input').value, unit);
 
     win.window.style.top = '0%';
     win.window.style.opacity = '1';
@@ -62,6 +91,7 @@ function goBack() {
     main.innerHTML = html;
     win.window.style.top = '110%';
     win.window.style.opacity = '0';
+    document.getElementById('unit-results').innerHTML = '';
 }
 
 function calculate(input, type) {

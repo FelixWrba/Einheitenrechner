@@ -173,3 +173,9 @@ footer a {
     border-radius: 4px;
     box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.3);
 }
+
+.grid {
+    display: grid;
+    grid-template-columns: max-content auto;
+    gap: 12px;
+}
