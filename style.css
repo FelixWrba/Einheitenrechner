@@ -187,3 +187,7 @@ footer a {
     column-gap: 32px;
     row-gap: 16px;
 }
+
+.grid *:nth-child(even) {
+    text-align: end;
+}

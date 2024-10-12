@@ -7,7 +7,13 @@ class Unit {
     }
 }
 // 8.81599 => 8.82
-const round = int => Math.round(int * 1000) / 1000;
+const round = int => {
+    let roundedInt = Math.round(int * 1000) / 1000;
+    // make number readable 7861399.890 => 7 861 399.890
+    let [intPart, floatPart] = roundedInt.toString().split(".");
+    intPart = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    return floatPart ? `${intPart}.${floatPart}` : intPart;
+};
 
 let unitResults = document.getElementById('unit-results');
 let main = document.getElementById('main');
@@ -30,12 +36,12 @@ let units = {
         else return `<h3>Gültige Einheiten</h3><p>s, min, h, d, w, mon, y</p>`;
 
         return `<div class="grid"><span>Sekunden:</span><span>${round(seconds)}</span>
-        <span>Minuten:</span></span>${round(seconds / 60)}</span>
-        <span>Stunden:</span></span>${round(seconds / 3600)}</span>
-        <span>Tage:</span></span>${round(seconds / 86400)}</span>
-        <span>Wochen:</span></span>${round(seconds / 604800)}</span>
-        <span>Monate:</span></span>${round(seconds / 2592000)}</span>
-        <span>Jahre:</span></span>${round(seconds / 31536000)}</span></div>`;
+        <span>Minuten:</span><span>${round(seconds / 60)}</span>
+        <span>Stunden:</span><span>${round(seconds / 3600)}</span>
+        <span>Tage:</span><span>${round(seconds / 86400)}</span>
+        <span>Wochen:</span><span>${round(seconds / 604800)}</span>
+        <span>Monate:</span><span>${round(seconds / 2592000)}</span>
+        <span>Jahre:</span><span>${round(seconds / 31536000)}</span></div>`;
     }),
     'Länge': new Unit('20m', (value, unit) => {
         let meters;
@@ -51,16 +57,16 @@ let units = {
 
         return `<div class="grid">
         <h3>Metrisch:</h3><span></span>
-        <span>Meter:</span></span>${round(meters)}</span>
-        <span>Seemeilen:</span></span>${round(meters / 1852)}</span>
+        <span>Meter:</span><span>${round(meters)}</span>
+        <span>Seemeilen:</span><span>${round(meters / 1852)}</span>
         <h3>Imperial:</h3><span></span>
-        <span>Zoll:</span></span>${round(meters * 100 / 2.54)}</span>
-        <span>Fuß:</span></span>${round(meters * 100 / 30.48)}</span>
-        <span>Yard:</span></span>${round(meters * 100 / 91.44)}</span>
-        <span>Meilen:</span></span>${round(meters / 1609.344)}</span>
+        <span>Zoll:</span><span>${round(meters * 100 / 2.54)}</span>
+        <span>Fuß:</span><span>${round(meters * 100 / 30.48)}</span>
+        <span>Yard:</span><span>${round(meters * 100 / 91.44)}</span>
+        <span>Meilen:</span><span>${round(meters / 1609.344)}</span>
         <h3>Astronomisch</h3><span></span>
-        <span>AE:</span></span>${round(meters / 149597870700)}</span>
-        <span>Lichtjahr:</span></span>${round(meters / 9.460730472580800e15)}</span></div>`;
+        <span>AE:</span><span>${round(meters / 149597870700)}</span>
+        <span>Lichtjahr:</span><span>${round(meters / 9.460730472580800e15)}</span></div>`;
     }),
     'Fläche': new Unit('16m2', (value, unit) => {
 
@@ -69,10 +75,42 @@ let units = {
 
     }),
     'Masse': new Unit('8kg', (value, unit) => {
+        let kilogramm;
+        if (unit == 'g') kilogramm = value / 1000;
+        else if (unit == 'kg') kilogramm = value;
+        else if (unit == 't') kilogramm = value * 1000;
+        else if (unit == 'lb') kilogramm = value * 0.45359237;
+        else if (unit == 'oz') kilogramm = value / 35.27396;
+        else if (unit == 'st') kilogramm = value * 6.35029318;
+        else if (unit == 'ct') kilogramm = value * 0.0002;
+        else if (unit == 'sl') kilogramm = value * 14.5939;
+        else return `<h3>Gültige Einheiten</h3><p>g, kg, t, lb, oz, st, ct, sl</p>`;
 
+        return `<div class="grid">
+        <h3>Metrisch:</h3><span></span>
+        <span>Gramm:</span><span>${round(kilogramm * 1000)}</span>
+        <span>Kilogram:</span><span>${round(kilogramm)}</span>
+        <span>Tonne:</span><span>${round(kilogramm / 1000)}</span>
+        <h3>Angloamerikanisch:</h3><span></span>
+        <span>Pfund:</span><span>${round(kilogramm / 0.45359237)}</span>
+        <span>Unze:</span><span>${round(kilogramm * 35.27396)}</span>
+        <span>Stein:</span><span>${round(kilogramm / 6.35029318)}</span>
+        <h3>Sonstiges:</h3><span></span>
+        <span>Carat:</span><span>${round(kilogramm / 0.0002)}</span>
+        <span>Slug:</span><span>${round(kilogramm / 14.5939)}</span></div>`;
     }),
     'Temperatur': new Unit('18F', (value, unit) => {
+        let celsius;
+        if (unit == 'C') celsius = value;
+        else if (unit == 'K') celsius = value + 273.16;
+        else if (unit == 'F') celsius = value * 10;
+        else return `<h3>Gültige Einheiten</h3><p>C, K, F</p>`;
 
+        console.log(unit);
+        return `<div class="grid">
+        <span>Celsius:</span><span>${round(celsius)}</span>
+        <span>Kelvin:</span><span>${round(celsius - 273.16)}</span>
+        <span>Fahrenheit:</span><span>${round(celsius / 1000)}</span></div>`;
     }),
     'Währung': new Unit('12€', (value, unit) => {
 
@@ -107,10 +145,13 @@ function calculate(input, type) {
     if (input == '' || !/[A-z]/.test(input) || !/[0-9]/.test(input)) {
         return '<div class="error">Eingabe nicht gültig</div>';
     }
-    let fistLetterPos = findFirstLetter(input);
+    if (input.indexOf(',') > -1) {
+        return '<div class="error">Verwende einen Punkt anstatt ein Komma.</div>';
+    }
+    let firstLetterPos = findFirstLetter(input);
     // parse input in value and unit
-    let value = input.slice(0, fistLetterPos);
-    let unit = input.slice(fistLetterPos);
+    let value = input.slice(0, firstLetterPos);
+    let unit = input.slice(firstLetterPos);
     return units[type].calculate(value, unit);
 }
 
@@ -124,4 +165,4 @@ function findFirstLetter(str) {
 }
 
 goBack();
-openUnit('Länge');
+openUnit('Temperatur');
