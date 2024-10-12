@@ -20,13 +20,13 @@ let win = {
 let units = {
     'Zeit': new Unit('120s', (value, unit) => {
         let seconds;
-        if(unit == 's') seconds = value;
-        else if(unit == 'min') seconds = value * 60;
-        else if(unit == 'h') seconds = value * 3600;
-        else if(unit == 'd') seconds = value * 86400;
-        else if(unit == 'w') seconds = value * 604800;
-        else if(unit == 'mon') seconds = value * 2592000;
-        else if(unit == 'y') seconds = value * 31536000;
+        if (unit == 's') seconds = value;
+        else if (unit == 'min') seconds = value * 60;
+        else if (unit == 'h') seconds = value * 3600;
+        else if (unit == 'd') seconds = value * 86400;
+        else if (unit == 'w') seconds = value * 604800;
+        else if (unit == 'mon') seconds = value * 2592000;
+        else if (unit == 'y') seconds = value * 31536000;
         else return `<h3>Gültige Einheiten</h3><p>s, min, h, d, w, mon, y</p>`;
 
         return `<div class="grid"><span>Sekunden:</span><span>${round(seconds)}</span>
@@ -39,21 +39,28 @@ let units = {
     }),
     'Länge': new Unit('20m', (value, unit) => {
         let meters;
-        if(unit == 'm') meters = value;
-        else if(unit == 'nm') meters = value * 1852;
-        else if(unit == 'z') meters = value / 100 * 2.54;
-        else if(unit == 'ft') meters = value / 100 * 30.48;
-        else if(unit == 'y') meters = value * 604800;
-        else if(unit == 'mi') meters = value * 2592000;
-        else if(unit == 'sm') meters = value * 31536000;
-        else return `<h3>Gültige Einheiten</h3><p>m, nm, z, ft, y, mi, sm</p>`;
-        return `<div class="grid"><span>Sekunden:</span><span>${round(seconds)}</span>
-        <span>Minuten:</span></span>${round(seconds / 60)}</span>
-        <span>Stunden:</span></span>${round(seconds / 3600)}</span>
-        <span>Tage:</span></span>${round(seconds / 86400)}</span>
-        <span>Wochen:</span></span>${round(seconds / 604800)}</span>
-        <span>Monate:</span></span>${round(seconds / 2592000)}</span>
-        <span>Jahre:</span></span>${round(seconds / 31536000)}</span></div>`;
+        if (unit == 'm') meters = value;
+        else if (unit == 'nm') meters = value * 1852;
+        else if (unit == 'z') meters = value / 100 * 2.54;
+        else if (unit == 'ft') meters = value / 100 * 30.48;
+        else if (unit == 'y') meters = value / 100 * 91.44;
+        else if (unit == 'mi') meters = value * 1609.344;
+        else if (unit == 'ae') meters = value * 149597870700;
+        else if (unit == 'ly') meters = value * 9.460730472580800e15;
+        else return `<h3>Gültige Einheiten</h3><p>m, nm, z, ft, y, mi, ae, ly</p>`;
+
+        return `<div class="grid">
+        <h3>Metrisch:</h3><span></span>
+        <span>Meter:</span></span>${round(meters)}</span>
+        <span>Seemeilen:</span></span>${round(meters / 1852)}</span>
+        <h3>Imperial:</h3><span></span>
+        <span>Zoll:</span></span>${round(meters * 100 / 2.54)}</span>
+        <span>Fuß:</span></span>${round(meters * 100 / 30.48)}</span>
+        <span>Yard:</span></span>${round(meters * 100 / 91.44)}</span>
+        <span>Meilen:</span></span>${round(meters / 1609.344)}</span>
+        <h3>Astronomisch</h3><span></span>
+        <span>AE:</span></span>${round(meters / 149597870700)}</span>
+        <span>Lichtjahr:</span></span>${round(meters / 9.460730472580800e15)}</span></div>`;
     }),
     'Fläche': new Unit('16m2', (value, unit) => {
 
@@ -97,7 +104,7 @@ function goBack() {
 function calculate(input, type) {
     // Check if input valid
     input = input.trim();
-    if(input == '' || !/[A-z]/.test(input) || !/[0-9]/.test(input)) {
+    if (input == '' || !/[A-z]/.test(input) || !/[0-9]/.test(input)) {
         return '<div class="error">Eingabe nicht gültig</div>';
     }
     let fistLetterPos = findFirstLetter(input);
@@ -117,3 +124,4 @@ function findFirstLetter(str) {
 }
 
 goBack();
+openUnit('Länge');
