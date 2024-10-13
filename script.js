@@ -54,7 +54,6 @@ let units = {
         else if (unit == 'ae') meters = value * 149597870700;
         else if (unit == 'ly') meters = value * 9.460730472580800e15;
         else return `<h3>Gültige Einheiten</h3><p>m, nm, z, ft, y, mi, ae, ly</p>`;
-
         return `<div class="grid">
         <h3>Metrisch:</h3><span></span>
         <span>Meter:</span><span>${round(meters)}</span>
@@ -69,10 +68,23 @@ let units = {
         <span>Lichtjahr:</span><span>${round(meters / 9.460730472580800e15)}</span></div>`;
     }),
     'Fläche': new Unit('16m2', (value, unit) => {
-
-    }),
-    'Volumen': new Unit('4cm3', (value, unit) => {
-
+        let qmeters;
+        if (unit == 'mm2') qmeters = value / 1000000;
+        else if (unit == 'cm2') qmeters = value / 10000;
+        else if (unit == 'dm2') qmeters = value / 100;
+        else if (unit == 'm2') qmeters = value;
+        else if (unit == 'a') qmeters = value * 100;
+        else if (unit == 'ha') qmeters = value * 10000;
+        else if (unit == 'km2') qmeters = value * 1000000;
+        else return `<h3>Gültige Einheiten</h3><p>mm2, cm2, dm2, m2, a, ha, km2</p>`;
+        return `<div class="grid">
+        <span>Quadratmillimeter:</span><span>${round(qmeters * 1000000)}</span>
+        <span>Quadratzentimeter:</span><span>${round(qmeters * 10000)}</span>
+        <span>Quadratdezimeter:</span><span>${round(qmeters * 100)}</span>
+        <span>Quadratmeter:</span><span>${round(qmeters)}</span>
+        <span>Ar:</span><span>${round(qmeters / 100)}</span>
+        <span>Hektar:</span><span>${round(qmeters / 10000)}</span>
+        <span>Quadratkilometer:</span><span>${round(qmeters / 1000000)}</span></div>`
     }),
     'Masse': new Unit('8kg', (value, unit) => {
         let kilogramm;
@@ -102,18 +114,13 @@ let units = {
     'Temperatur': new Unit('18F', (value, unit) => {
         let celsius;
         if (unit == 'C') celsius = value;
-        else if (unit == 'K') celsius = value + 273.16;
-        else if (unit == 'F') celsius = value * 10;
+        else if (unit == 'K') celsius = +value + 273.16;
+        else if (unit == 'F') celsius = (+value - 32) / (9 / 5);
         else return `<h3>Gültige Einheiten</h3><p>C, K, F</p>`;
-
-        console.log(unit);
         return `<div class="grid">
         <span>Celsius:</span><span>${round(celsius)}</span>
-        <span>Kelvin:</span><span>${round(celsius - 273.16)}</span>
-        <span>Fahrenheit:</span><span>${round(celsius / 1000)}</span></div>`;
-    }),
-    'Währung': new Unit('12€', (value, unit) => {
-
+        <span>Kelvin:</span><span>${round(+celsius - 273.16)}</span>
+        <span>Fahrenheit:</span><span>${round(+celsius * 9 / 5 + 32)}</span></div>`;
     })
 }
 
@@ -164,5 +171,5 @@ function findFirstLetter(str) {
     return -1;
 }
 
+
 goBack();
-openUnit('Temperatur');
