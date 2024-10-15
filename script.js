@@ -114,12 +114,12 @@ let units = {
     'Temperatur': new Unit('18F', (value, unit) => {
         let celsius;
         if (unit == 'C') celsius = value;
-        else if (unit == 'K') celsius = +value + 273.16;
+        else if (unit == 'K') celsius = +value - 273.15;
         else if (unit == 'F') celsius = (+value - 32) / (9 / 5);
         else return `<h3>Gültige Einheiten</h3><p>C, K, F</p>`;
         return `<div class="grid">
         <span>Celsius:</span><span>${round(celsius)}</span>
-        <span>Kelvin:</span><span>${round(+celsius - 273.16)}</span>
+        <span>Kelvin:</span><span>${round(+celsius + 273.15)}</span>
         <span>Fahrenheit:</span><span>${round(+celsius * 9 / 5 + 32)}</span></div>`;
     })
 }
