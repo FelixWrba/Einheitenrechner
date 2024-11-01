@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Einheitenrechner</title>
-    <meta name="description" content="Mit unserem Einheitenrechner können Sie schnell und einfach zwischen verschiedenen Maßeinheiten umrechnen. Ob Längen, Währungen, Volumen, Temperaturen oder mehr - die App bietet eine benutzerfreundliche Oberfläche und unterstützt zahlreiche gängige Einheiten. Ideal für den Alltag, die Arbeit oder beim Reisen, ermöglicht der Umrechner präzise Ergebnisse in Sekundenschnelle.">
+    <meta name="description"
+        content="Mit unserem Einheitenrechner können Sie schnell und einfach zwischen verschiedenen Maßeinheiten umrechnen. Ob Längen, Währungen, Volumen, Temperaturen oder mehr - die App bietet eine benutzerfreundliche Oberfläche und unterstützt zahlreiche gängige Einheiten. Ideal für den Alltag, die Arbeit oder beim Reisen, ermöglicht der Umrechner präzise Ergebnisse in Sekundenschnelle.">
     <meta name="keywords" content="einheitenrechner, kostenlos, free">
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="./icons/32.png" type="image/x-icon">
@@ -26,7 +27,11 @@
     <!-- Window to calculate units -->
     <section id="window">
         <header id="header-win">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff" onclick="goBack();"><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg><h1 id="header-win-title">Länge</h1>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff"
+                onclick="goBack();">
+                <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" />
+            </svg>
+            <h1 id="header-win-title">Länge</h1>
         </header>
         <main id="main-win">
             <form id="win-input" action="javascript:">
@@ -47,8 +52,13 @@
     <!-- Javascript -->
     <script src="./script.js"></script>
     <script>
-        if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register("/sw.js");
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(registration => {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                }).catch(error => {
+                    console.log('Service Worker registration failed:', error);
+                });
         }
     </script>
 </body>

@@ -1,44 +1,58 @@
 {
-  "name": "Einheitenrechner",
-  "short_name": "Einheitenrechner",
-  "description": "Mit unserem Einheitenrechner können Sie schnell und einfach zwischen verschiedenen Maßeinheiten umrechnen. Ob Längen, Währungen, Volumen, Temperaturen oder mehr - die App bietet eine benutzerfreundliche Oberfläche und unterstützt zahlreiche gängige Einheiten.",
-  "theme_color": "#fcfcfc",
-  "background_color": "#fcfcfc",
-  "display": "standalone",
-  "orientation": "portrait",
-  "start_url": "/index.html",
-  "icons": [
-    {
-      "src": "icons/200.png",
-      "sizes": "200x200"
-    },
-    {
-      "src": "icons/128.png",
-      "sizes": "128x128"
-    },
-    {
-      "src": "icons/32.png",
-      "sizes": "32x32"
-    },
-    {
-      "src": "icons/16.png",
-      "sizes": "16x16"
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "/img/desktop-screenshot.png",
-      "sizes": "2560x1368",
-      "type": "image/webp",
-      "form_factor": "wide",
-      "label": "Homescreen von Einheitenrechner"
-    },
-    {
-      "src": "/img/mobile-screenshot.png",
-      "sizes": "1168x2448",
-      "type": "image/webp",
-      "form_factor": "narrow",
-      "label": "Homescreen von Einheitenrechner"
-    }
-  ]
+	"name": "Einheitenrechner",
+	"short_name": "Einheitenrechner",
+	"description": "Mit unserem Einheitenrechner können Sie schnell und einfach zwischen verschiedenen Maßeinheiten umrechnen.",
+	"theme_color": "#fcfcfc",
+	"background_color": "#fcfcfc",
+	"display": "standalone",
+	"orientation": "any",
+	"start_url": "index.html",
+	"icons": [
+		{
+			"src": "icons/512.png",
+            "type": "image/png",
+			"sizes": "512x512"
+		},
+		{
+			"src": "icons/192.png",
+            "type": "image/png",
+			"sizes": "192x192"
+		},
+		{
+			"src": "icons/200.png",
+            "type": "image/png",
+			"sizes": "200x200"
+		},
+		{
+			"src": "icons/128.png",
+            "type": "image/png",
+			"sizes": "128x128"
+		},
+		{
+			"src": "icons/32.png",
+            "type": "image/png",
+			"sizes": "32x32"
+		},
+		{
+			"src": "icons/16.png",
+            "type": "image/png",
+			"sizes": "16x16"
+		}
+	],
+	"screenshots": [
+		{
+			"src": "/img/desktop-screenshot.png",
+			"sizes": "2560x1368",
+			"type": "image/webp",
+			"form_factor": "wide",
+			"label": "Homescreen von Einheitenrechner"
+		},
+		{
+			"src": "/img/mobile-screenshot.png",
+			"sizes": "1168x2448",
+			"type": "image/webp",
+			"form_factor": "narrow",
+			"label": "Homescreen von Einheitenrechner"
+		}
+	]
 }
