@@ -86,7 +86,7 @@ let units = {
         <span>Hektar:</span><span>${round(qmeters / 10000)}</span>
         <span>Quadratkilometer:</span><span>${round(qmeters / 1000000)}</span></div>`
     }),
-    'Masse': new Unit('8kg', (value, unit) => {
+    'Gewicht': new Unit('8kg', (value, unit) => {
         let kilogramm;
         if (unit == 'g') kilogramm = value / 1000;
         else if (unit == 'kg') kilogramm = value;
@@ -121,6 +121,39 @@ let units = {
         <span>Celsius:</span><span>${round(celsius)}</span>
         <span>Kelvin:</span><span>${round(+celsius + 273.15)}</span>
         <span>Fahrenheit:</span><span>${round(+celsius * 9 / 5 + 32)}</span></div>`;
+    }),
+    'Geschwindigkeit': new Unit('12mih', (value, unit) => {
+        let mps;
+        if (unit == 'ms') mps = value;
+        else if (unit == 'mh') mps = value / 3600;
+        else if (unit == 'kms') mps = value * 1000;
+        else if (unit == 'kmh') mps = value / 3.6;
+        else if (unit == 'c') mps = value * 299792458;
+        else if (unit == 'fts') mps = value * 0.3048;
+        else if (unit == 'fth') mps = (value * 0.3048) / 3600;
+        else if (unit == 'mis') mps = value * 1609.344;
+        else if (unit == 'mih') mps = (value * 1609.344) / 3600;
+        else if (unit == 'kn') mps = value * 0.514444;
+        else if (unit == 'nms') mps = value * 1852;
+        else if (unit == 'nmh') mps = (value * 1852) / 3600;
+        else return `<h3>Gültige Einheiten</h3><p>ms, mh, kms, kmh, c,<br>fts, fth, mis, mih,<br>kn, nms, nmh</p>`;
+
+        return `<div class="grid">
+        <h3>Metrisch:</h3><span></span>
+        <span>Meter/Sekunde:</span><span>${round(mps)}</span>
+        <span>Meter/Stunde:</span><span>${round(mps * 3600)}</span>
+        <span>Kilometer/Sekunde:</span><span>${round(mps / 1000)}</span>
+        <span>Kilometer/Stunde:</span><span>${round(mps * 3.6)}</span>
+        <span>Lichtgeschwindigkeit:</span><span>${round(mps / 299792458)}</span>
+        <h3>Imperial:</h3><span></span>
+        <span>Fuß/Sekunde:</span><span>${round(mps / 0.3048)}</span>
+        <span>Fuß/Stunde:</span><span>${round((mps / 0.3048) * 3600)}</span>
+        <span>Meilen/Sekunde:</span><span>${round(mps / 1609.344)}</span>
+        <span>Meilen/Stunde:</span><span>${round((mps / 1609.344) * 3600)}</span>
+        <h3>Nautisch:</h3><span></span>
+        <span>Knoten:</span><span>${round(mps / 0.514444)}</span>
+        <span>Seemeilen/Sekunde:</span><span>${round(mps / 1852)}</span>
+        <span>Seemeilen/Stunde:</span><span>${round((mps / 1852) * 3600)}</span></div>`;
     })
 }
 
@@ -150,7 +183,7 @@ function calculate(input, type) {
     // Check if input valid
     input = input.trim();
     if (input == '' || !/[A-z]/.test(input) || !/[0-9]/.test(input)) {
-        return '<div class="error">Eingabe nicht gültig</div>';
+        return '<div class="error">Eingabe nicht gültig. Tippe "99help" für Hilfe.</div>';
     }
     if (input.indexOf(',') > -1) {
         return '<div class="error">Verwende einen Punkt anstatt ein Komma.</div>';
