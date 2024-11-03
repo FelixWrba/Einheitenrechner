@@ -162,8 +162,11 @@ function openUnit(unit) {
     document.getElementById('win-input').innerHTML = `<input type="text" class="input" placeholder="z. B. ${units[unit].example}" id="unit-input" autocomplete="off"><button class="btn-pink">Berechnen</button>`;
     document.getElementById('win-input').onsubmit = () => unitResults.innerHTML = calculate(document.getElementById('unit-input').value, unit);
 
-    win.window.style.top = '0%';
-    win.window.style.opacity = '1';
+    win.window.style.display = 'block';
+    setTimeout(() => {
+        win.window.style.top = '0%';
+        win.window.style.opacity = '1';
+    }, 10);
 }
 
 function goBack() {
@@ -174,8 +177,10 @@ function goBack() {
     html += '</ul>';
     document.getElementById('header').scrollIntoView();
     main.innerHTML = html;
-    win.window.style.top = '110%';
+
+    win.window.style.top = '10%';
     win.window.style.opacity = '0';
+    setTimeout(() => win.window.style.display = 'none', 300);
     document.getElementById('unit-results').innerHTML = '';
 }
 

@@ -66,11 +66,12 @@ svg:hover {
 }
 
 #window {
+    display: none;
     position: fixed;
-    top: 110%;
+    top: 10%;
     background-color: #fcfcfc;
     width: 100%;
-    transition: all 0.4s;
+    transition: all .3s;
     opacity: 0;
 }
 
